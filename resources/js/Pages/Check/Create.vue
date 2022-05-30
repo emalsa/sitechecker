@@ -1,30 +1,35 @@
 <template>
-    <div v-if="form.errors">{{ form.errors }}</div>
-    <form @submit.prevent="submit">
-        <div>
+    <BreezeAuthenticatedLayout>
+        <div v-if="form.errors">{{ form.errors }}</div>
+        <form @submit.prevent="submit">
             <div>
-                <BreezeLabel for="name" value="Title"/>
-                <BreezeInput id="title" type="text" class="mt-1 block w-full" v-model="form.title" required autofocus
-                             autocomplete="title"/>
-                <BreezeLabel for="resource" value="Resource"/>
-                <BreezeInput id="resource" type="text" class="mt-1 block w-full" v-model="form.resource" required
-                             autofocus autocomplete="resource"/>
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Save
-                </BreezeButton>
+                <div>
+                    <BreezeLabel for="name" value="Titless"/>
+                    <BreezeInput id="title" type="text" class="mt-1 block w-full" v-model="form.title" required
+                                 autofocus
+                                 autocomplete="title"/>
+                    <BreezeLabel for="resource" value="Resource"/>
+                    <BreezeInput id="resource" type="text" class="mt-1 block w-full" v-model="form.resource" required
+                                 autofocus autocomplete="resource"/>
+                    <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Save
+                    </BreezeButton>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </BreezeAuthenticatedLayout>
 </template>
 
 <script>
 import BreezeInput from '@/Components/Input.vue';
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeButton from '@/Components/Button.vue';
 import {Head, Link, useForm} from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
+        BreezeAuthenticatedLayout,
         BreezeInput,
         BreezeLabel,
         BreezeButton,

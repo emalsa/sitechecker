@@ -1,11 +1,6 @@
 <script setup>
-import BreezeButton from '@/Components/Button.vue';
-import BreezeCheckbox from '@/Components/Checkbox.vue';
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import {useForm, Link} from '@inertiajs/inertia-vue3';
 
 defineProps({
     canResetPassword: Boolean,
@@ -26,42 +21,62 @@ const submit = () => {
 </script>
 
 <template>
-    <BreezeGuestLayout>
-        <Head title="Log in" />
+  <BreezeGuestLayout>
+    <Head title="Log in"/>
 
-        <BreezeValidationErrors class="mb-4" />
+    <BreezeValidationErrors class="mb-4"/>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
+    <div class="flex items-center justify-center h-screen px-6 bg-gray-200">
+      <div class="w-full max-w-sm p-6 bg-white rounded-md shadow-md">
+        <div class="flex items-center justify-center">
+          <svg></svg>
+          <span class="text-2xl font-semibold text-gray-700"></span>
         </div>
 
-        <form @submit.prevent="submit">
+        <form class="mt-4" @submit.prevent="submit">
+          <label class="block">
+            <span class="text-sm text-gray-700">Email</span>
+            <input
+                type="email"
+                class="block w-full mt-1 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
+                v-model="email"
+            />
+          </label>
+
+          <label class="block mt-3">
+            <span class="text-sm text-gray-700">Password</span>
+            <input
+                type="password"
+                class="block w-full mt-1 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
+                v-model="password"
+            />
+          </label>
+
+          <div class="flex items-center justify-between mt-4">
             <div>
-                <BreezeLabel for="email" value="Email" />
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+              <label class="inline-flex items-center">
+                <input type="checkbox"
+                       class="text-indigo-600 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"/>
+                <span class="mx-2 text-sm text-gray-600">Remember me</span>
+              </label>
             </div>
 
-            <div class="mt-4">
-                <BreezeLabel for="password" value="Password" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+            <div>
+              <Link v-if="canResetPassword" :href="route('password.request')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900">
+                Forgot your password?
+              </Link>
             </div>
+          </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <BreezeCheckbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
-                </Link>
-
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </BreezeButton>
-            </div>
+          <div class="mt-6">
+            <button type="submit"
+                    class="w-full px-4 py-2 text-sm text-center text-white bg-indigo-600 rounded-md focus:outline-none hover:bg-indigo-500">
+              Login
+            </button>
+          </div>
         </form>
+      </div>
+    </div>
     </BreezeGuestLayout>
 </template>
