@@ -1652,7 +1652,7 @@ select{
 html, body {
     font-family: Roboto !important;
     -webkit-font-smoothing: antialiased;
-    font-size: .875rem;
+    font-size: 0.95rem;
     line-height: 1.25rem;
 }
 
